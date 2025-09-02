@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login / Register — SHEQ+</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">SHEQ+</div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="chat.html">Chat Bot</a>
+      <a href="report.html">Report</a>
+      <a href="login.html">Login</a>
+      <button id="themeToggle6" aria-label="Toggle dark mode">🌙</button>
+    </nav>
+  </header>
+
+  <main class="container small">
+    <h1>Account</h1>
+
+    <div class="split">
+      <form id="loginForm" class="card">
+        <h3>Login</h3>
+        <label>Email</label>
+        <input id="loginEmail" type="email" required />
+        <label>Password</label>
+        <input id="loginPassword" type="password" required />
+        <button class="primary-btn" type="submit">Login</button>
+      </form>
+
+      <form id="registerForm" class="card">
+        <h3>Create account</h3>
+        <label>Name</label>
+        <input id="regName" required />
+        <label>Email</label>
+        <input id="regEmail" type="email" required />
+        <label>Password</label>
+        <input id="regPassword" type="password" required />
+        <button class="secondary-btn" type="submit">Register</button>
+      </form>
+    </div>
+
+    <p id="authMsg" class="muted"></p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
