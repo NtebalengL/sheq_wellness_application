@@ -1,12 +1,31 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin - SHEQ+</title><link rel="stylesheet" href="style.css"></head><body>
-<header><h1>Admin Dashboard</h1></header>
-<main><section id="loginSection"><h2>Login</h2><form id="loginForm"><input id="username" placeholder="Username"/><input id="password" type="password" placeholder="Password"/><button>Login</button></form></section>
-<section id="dashboard" class="hidden"><h2>Analytics</h2><div id="stats"></div><h3>Recent Messages</h3><ul id="recent"></ul></section></main>
-<script>
-const API = localStorage.getItem('SHEQ_API') || 'http://localhost:8000';
-const loginForm = document.getElementById('loginForm');
-const dashboard = document.getElementById('dashboard');
-const loginSection = document.getElementById('loginSection');
-loginForm.addEventListener('submit', async e=>{e.preventDefault(); const u=document.getElementById('username').value; const p=document.getElementById('password').value; const res=await fetch(API + '/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:u,password:p})}); if(!res.ok){alert('Login failed'); return;} const data=await res.json(); localStorage.setItem('SHEQ_TOKEN', data.access_token); loginSection.classList.add('hidden'); dashboard.classList.remove('hidden'); loadStats();});
-async function loadStats(){ const token = localStorage.getItem('SHEQ_TOKEN'); const res = await fetch(API + '/api/admin/analytics', {headers: {'Authorization':'Bearer ' + token}}); if(!res.ok){ alert('Not authorized'); return;} const data=await res.json(); document.getElementById('stats').innerHTML = '<p>Total messages: '+data.total_messages+'</p><p>Flagged: '+data.flagged_messages+'</p><p>Alerts: '+data.alerts+'</p>'; const recent = document.getElementById('recent'); recent.innerHTML=''; data.recent.forEach(r=>{ const li=document.createElement('li'); li.textContent = '['+r.created_at+'] ' + r.text_preview + (r.flagged ? ' (FLAGGED)' : ''); recent.appendChild(li); }); }
-</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin — SHEQ+</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">SHEQ+</div>
+  </header>
+
+  <main class="container">
+    <h1>Admin (Hidden)</h1>
+    <p class="lead">This page should be protected. Use server-side auth before exposing.</p>
+
+    <section>
+      <h2>Users</h2>
+      <table id="adminUsers" class="admin-table"><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Created</th></tr></thead><tbody></tbody></table>
+    </section>
+
+    <section>
+      <h2>Reports</h2>
+      <table id="adminReports" class="admin-table"><thead><tr><th>ID</th><th>User</th><th>Type</th><th>Message</th><th>Date</th></tr></thead><tbody></tbody></table>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
