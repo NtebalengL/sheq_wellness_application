@@ -1,6 +1,61 @@
-<!doctype html>
-<html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SHEQ+ MVP</title>
-<link rel="stylesheet" href="style.css"></head><body>
-<header><h1>SHEQ+ <span>Anonymous Health &amp; Safety Bot</span></h1><nav><button id="resourcesBtn">Resources</button><a href="#" id="health">Backend Health</a><a href="admin.html">Admin Dashboard</a></nav></header>
-<main><section id="chat"><div id="messages"></div><form id="form"><input id="input" placeholder="Ask a question (e.g., 'Where can I get contraception?')" autocomplete="off" /><button>Send</button></form></section><aside id="panel" class="hidden"><h2>Support & Hotlines</h2><ul id="resources"></ul></aside></main><footer><small>For information only. Not medical advice.</small></footer><script src="app.js"></script></body></html>
+`html
+
+
+<aside class="hero-right">
+<div class="stat-card">
+<h3>Teenage pregnancy in SA</h3>
+<p class="big">18% <span class="muted">(example)</span></p>
+<canvas id="pregChart" width="300" height="180"></canvas>
+</div>
+
+
+<div class="small-card">
+<h4>Quick Chat</h4>
+<p>Get anonymous guidance from our AI bot.</p>
+<a href="chat.html" class="secondary-btn">Chat now</a>
+</div>
+</aside>
+</section>
+
+
+<section class="how-it-works">
+<h2>How SHEQ+ helps</h2>
+<div class="cards">
+<article>
+<h3>Report anonymously</h3>
+<p>Fill out a secure form that notifies administrators while keeping your identity private.</p>
+</article>
+<article>
+<h3>AI Guidance</h3>
+<p>Ask the chat-bot about safety, rights, and support — it fetches up-to-date, reputable information.</p>
+</article>
+<article>
+<h3>Resources & Directory</h3>
+<p>Find helplines, clinics and local support organisations in South Africa.</p>
+</article>
+</div>
+</section>
+</main>
+
+
+<footer class="site-footer">
+<p>© SHEQ+ — Supporting safety for children and women in South Africa</p>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+<script>
+// small chart data (example, responsive)
+const ctx = document.getElementById('pregChart').getContext('2d');
+new Chart(ctx, {
+type: 'bar',
+data: {
+labels: ['15-19', '10-14', '20-24'],
+datasets: [{ label: 'Pregnancy rate (%)', data: [18, 5, 11] }]
+},
+options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+});
+</script>
+</body>
+</html>
